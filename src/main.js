@@ -1,60 +1,40 @@
-import './style.css'
-import javascriptLogo from './assets/javascript.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import { setupCounter } from './counter.js'
+import { createClient } from '@supabase/supabase-js'
 
-document.querySelector('#app').innerHTML = `
-<section id="center">
-  <div class="hero">
-    <img src="${heroImg}" class="base" width="170" height="179">
-    <img src="${javascriptLogo}" class="framework" alt="JavaScript logo"/>
-    <img src=${viteLogo} class="vite" alt="Vite logo" />
-  </div>
-  <div>
-    <h1>Get started</h1>
-    <p>Edit <code>src/main.js</code> and save to test <code>HMR</code></p>
-  </div>
-  <button id="counter" type="button" class="counter"></button>
-</section>
+const supabaseUrl = 'https://zmabqgopwdtmqqblcwly.supabase.co'
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InptYWJxZ29wd2R0bXFxYmxjd2x5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQwOTYwNjEsImV4cCI6MjA4OTY3MjA2MX0.P5rPSAIMrri0KuDytXPcpCX9_gxTWgN6CIZiaI9WLVE'
 
-<div class="ticks"></div>
+const supabase = createClient(supabaseUrl, supabaseKey)
 
-<section id="next-steps">
-  <div id="docs">
-    <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#documentation-icon"></use></svg>
-    <h2>Documentation</h2>
-    <p>Your questions, answered</p>
-    <ul>
-      <li>
-        <a href="https://vite.dev/" target="_blank">
-          <img class="logo" src=${viteLogo} alt="" />
-          Explore Vite
-        </a>
-      </li>
-      <li>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-          <img class="button-icon" src="${javascriptLogo}" alt="">
-          Learn more
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div id="social">
-    <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#social-icon"></use></svg>
-    <h2>Connect with us</h2>
-    <p>Join the Vite community</p>
-    <ul>
-      <li><a href="https://github.com/vitejs/vite" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#github-icon"></use></svg>GitHub</a></li>
-      <li><a href="https://chat.vite.dev/" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#discord-icon"></use></svg>Discord</a></li>
-      <li><a href="https://x.com/vite_js" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#x-icon"></use></svg>X.com</a></li>
-      <li><a href="https://bsky.app/profile/vite.dev" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#bluesky-icon"></use></svg>Bluesky</a></li>
-    </ul>
-  </div>
-</section>
+const boton = document.getElementById("cargarDatos")
+const tabla = document.getElementById("tablaLibros")
 
-<div class="ticks"></div>
-<section id="spacer"></section>
-`
+boton.addEventListener("click", async () => {
 
-setupCounter(document.querySelector('#counter'))
+    const { data, error } = await supabase
+        .from("libros")
+        .select("*")
+
+    if(error){
+        console.log("Error:", error)
+        return
+    }
+
+    tabla.innerHTML = ""
+
+    data.forEach(libro => {
+
+        const fila = document.createElement("tr")
+
+        fila.innerHTML = `
+        <td>${libro.id}</td>
+        <td>${libro.titulo}</td>
+        <td>${libro.autor}</td>
+        <td>${libro.anio}</td>
+        <td>${libro.genero}</td>
+        `
+
+        tabla.appendChild(fila)
+
+    })
+
+})
