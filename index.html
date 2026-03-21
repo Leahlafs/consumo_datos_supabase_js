@@ -4,10 +4,27 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>consumo_datos_supabase_js</title>
+    <title>Libros Supabase</title>
   </head>
   <body>
-    <div id="app"></div>
+    <h1>Lista de Libros</h1>
+
+<button id="cargarDatos">Cargar libros</button>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Título</th>
+      <th>Autor</th>
+      <th>Año</th>
+      <th>Género</th>
+    </tr>
+  </thead>
+
+  <tbody id="tablaLibros">
+  </tbody>
+</table>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
