@@ -13,9 +13,11 @@ Proyecto web sencillo donde puedes agregar y ver libros en una tabla.
 
 ---
 
-## 📋 Funciones
+## 📋 Funciones-CRUD
 
 * Agregar libros
+* Editar libros
+* Eliminar libros
 * Ver libros en tabla
 * Conexión con base de datos (Supabase)
 
