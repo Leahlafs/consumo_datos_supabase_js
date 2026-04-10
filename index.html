@@ -10,8 +10,17 @@
   <body>
     <h1>Lista de Libros</h1>
 
-<button id="cargarDatos">Cargar libros</button>
 
+<div class="formulario">
+
+<input type="text" id="titulo" placeholder="Título">
+<input type="text" id="autor" placeholder="Autor">
+<input type="number" id="anio" placeholder="Año">
+<input type="text" id="genero" placeholder="Género">
+
+<button class="btnAgregar" id="agregarLibro">Agregar</button>
+<button class="btnCargar" id="cargarDatos">Cargar libros</button>
+</div>
 <table border="1">
   <thead>
     <tr>
@@ -22,6 +31,7 @@
       <th>Género</th>
     </tr>
   </thead>
+
 
   <tbody id="tablaLibros">
   </tbody>
