@@ -86,10 +86,18 @@ window.eliminar = async (id) => {
 window.editar = async (id) => {
 
     const nuevoTitulo = prompt("Nuevo título")
+    const nuevoAutor = prompt("Nuevo autor")
+    const nuevoAnio = prompt("Nuevo año")
+    const nuevoGenero = prompt("Nuevo género")
 
     const { error } = await supabase
         .from("libros")
-        .update({ titulo: nuevoTitulo })
+        .update({
+            titulo: nuevoTitulo,
+            autor: nuevoAutor,
+            anio: nuevoAnio,
+            genero: nuevoGenero
+        })
         .eq("id", id)
 
     if(error){
@@ -97,5 +105,5 @@ window.editar = async (id) => {
         return
     }
 
-    alert("Actualizado")
+    alert("Libro actualizado")
 }
